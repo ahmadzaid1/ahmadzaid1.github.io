@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Character Card Maker</title>
+</head>
+
+<body>
+    <div class="header">
+        <h1>Character Card Maker</h1>
+    </div>
+    <div class="container">
+        <!-- Left Section: Form -->
+        <div class="form-section">
+            <!-- Image Attributes -->
+            <div class="section">
+                <h2 class="section-title">Image Attributes</h2>
+                <label for="character-image">Character Image</label>
+                <input type="file" id="character-image" accept="image/*">
+                <label for="image-size">Image Size</label>
+                <input type="range" id="image-size" min="50" max="300" value="100">
+                <label for="image-shape">Image Shape</label>
+                <select id="image-shape">
+                    <option value="circle">Circle</option>
+                    <option value="rectangle">Rectangle</option>
+                </select>
+            </div>
+            <!-- Character Attributes -->
+            <div class="section">
+                <h2 class="section-title">Character Attributes</h2>
+                <label for="character-name">Name</label>
+                <input type="text" id="character-name" placeholder="Character Name">
+                <label for="character-age">Age</label>
+                <input type="text" id="character-age" placeholder="Character Age">
+                <label for="character-race">Race</label>
+                <select id="character-race">
+                    <option value="human">Human</option>
+                    <option value="elf">Elf</option>
+                    <option value="orc">Orc</option>
+                </select>
+                <input type="text" id="character-race-other" placeholder="Or enter a custom race">
+                <label for="character-appearance">Appearance</label>
+                <textarea id="character-appearance" placeholder="Describe appearance"></textarea>
+                <label for="character-overview">Overview</label>
+                <textarea id="character-overview" placeholder="Give an overview"></textarea>
+                <label for="character-goals">Goals</label>
+                <textarea id="character-goals" placeholder="Describe character's goals"></textarea>
+            </div>
+        </div>
+        <!-- Right Section: Card Preview and Settings -->
+        <div class="card-preview">
+            <!-- Character Card -->
+            <div class="card" id="card" style="display: flex; padding: 20px; border: 5px solid #b07a3b; border-radius: 12px; max-width: 400px; margin-bottom: 20px;">
+                <div style="flex: 1;">
+                    <img id="preview-image" src="" alt="Character Image" style="display: none; margin-bottom: 10px;">
+                    <p id="preview-overview"></p>
+                    <p id="preview-goals"></p>
+                </div>
+                <div style="flex: 1; padding-left: 10px;">
+                    <h3 id="preview-name"></h3>
+                    <p id="preview-age"></p>
+                    <p id="preview-race"></p>
+                    <p id="preview-appearance"></p>
+                </div>
+            </div>
+            <!-- Card Settings -->
+            <div class="section">
+                <h2 class="section-title">Card Settings</h2>
+                <label for="card-border-color">Card Border Color</label>
+                <input type="color" id="card-border-color" value="#b07a3b">
+                <label for="font-size">Font Size</label>
+                <input type="range" id="font-size" min="12" max="24" value="16">
+                <label for="font-color">Font Color</label>
+                <input type="color" id="font-color" value="#333333">
+                <label for="font-style">Font Style</label>
+                <select id="font-style">
+                    <option value="Arial, sans-serif">Arial</option>
+                    <option value="Cinzel, serif">Cinzel</option>
+                    <option value="Uncial Antiqua, cursive">Uncial Antiqua</option>
+                    <option value="Courier New, monospace">Courier New</option>
+                </select>
+            </div>
+        </div>
+    </div>
+<script src="scripts.js"></script>
+</body>
+
+</html>

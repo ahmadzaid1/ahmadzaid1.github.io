@@ -1,0 +1,172 @@
+/* General Styling */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f9f9f9;
+}
+
+header {
+  background-color: #333;
+  color: white;
+  padding: 1em 0;
+  width: 100%;
+  text-align: center;
+}
+
+h1, h2 {
+  margin: 0 0 1em;
+}
+
+/* Layout for Main Container */
+#main-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 90%;
+  margin: 2em 0;
+  gap: 2em;
+}
+
+section {
+  background-color: #fff;
+  padding: 2em;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  flex: 1;
+  min-width: 300px;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+section h2 {
+  margin-bottom: 1.5em;
+  text-align: center;
+}
+
+/* Form Styling */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+label {
+  font-weight: bold;
+}
+
+input, textarea, select {
+  padding: 0.7em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+button {
+  padding: 0.8em;
+  font-size: 1em;
+  color: white;
+  background-color: #444;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #666;
+}
+
+/* Timeline Section */
+#timeline-container {
+     position: relative;
+  width: 1200px; /* Fixed width */
+  height: 1000px; /* Fixed height */
+  margin: 0 auto; /* Center horizontally */
+  padding: 1em; /* Add padding inside the container */
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden; /* Prevent content from spilling out */
+  box-sizing: border-box; /* Include padding in width/height */
+}
+
+/* Timeline Line */
+#timeline-line {
+     position: absolute;
+  top: 50%; /* Place line in the middle */
+  left: 0;
+  width: 100%; /* Full width of the container */
+  height: 4px; /* Line thickness */
+  background-color: #444; /* Line color */
+  z-index: 0; /* Behind events */
+}
+
+/* Event Cards */
+.event {
+   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 200px; /* Fixed size for each event */
+  padding: 1em;
+  margin: 0 2em; /* Spacing between events */
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  position: relative;
+  z-index: 1; /* Above the line */
+}
+
+.event-title {
+  font-weight: bold;
+  margin-bottom: 0.5em;
+  text-align: center;
+}
+
+.event-description {
+  margin: 0.5em 0;
+  text-align: center;
+}
+
+.event-date {
+  font-style: italic;
+  color: #666;
+  text-align: center;
+}
+
+/* Event Line Connector */
+.event::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -2em; /* Gap between events */
+  width: 2em; /* Length of the connecting line */
+  height: 4px; /* Thickness of the connecting line */
+  background-color: #444; /* Same as timeline line */
+  transform: translateY(-50%);
+}
+
+.event:last-child::after {
+  content: none; /* Remove the line from the last event */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  #main-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #timeline-container {
+    padding: 2em;
+  }
+
+  .event {
+    margin: 0 1em;
+  }
+}
