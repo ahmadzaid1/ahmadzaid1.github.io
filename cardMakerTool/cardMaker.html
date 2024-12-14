@@ -15,6 +15,13 @@
     <div class="container">
         <!-- Left Section: Form -->
         <div class="form-section">
+            <div id="export-import-section">
+                <h3>Export / Import</h3>
+                <button id="export-btn">Export as JSON</button>
+                <input type="file" id="import-btn" accept=".json" style="display: none;">
+                <br>
+                <label for="import-btn" id="import-label">Import JSON</label>
+            </div>
             <!-- Image Attributes -->
             <div class="section">
                 <h2 class="section-title">Image Attributes</h2>
@@ -40,8 +47,9 @@
                     <option value="human">Human</option>
                     <option value="elf">Elf</option>
                     <option value="orc">Orc</option>
+                    <option value="custom">Other</option>
                 </select>
-                <input type="text" id="character-race-other" placeholder="Or enter a custom race">
+                <input type="text" id="character-race-other" placeholder="Enter custom race" style="display: none;">
                 <label for="character-appearance">Appearance</label>
                 <textarea id="character-appearance" placeholder="Describe appearance"></textarea>
                 <label for="character-overview">Overview</label>
@@ -53,17 +61,28 @@
         <!-- Right Section: Card Preview and Settings -->
         <div class="card-preview">
             <!-- Character Card -->
-            <div class="card" id="card" style="display: flex; padding: 20px; border: 5px solid #b07a3b; border-radius: 12px; max-width: 400px; margin-bottom: 20px;">
-                <div style="flex: 1;">
-                    <img id="preview-image" src="" alt="Character Image" style="display: none; margin-bottom: 10px;">
-                    <p id="preview-overview"></p>
-                    <p id="preview-goals"></p>
+            <div class="card" id="card" style="padding: 20px; border: 5px solid #b07a3b; border-radius: 12px; max-width: 400px; margin-bottom: 20px;">
+                <div id="vertical-split-layout" style="display: flex;">
+                    <div style="flex: 1;">
+                        <img id="preview-image" src="" alt="Character Image" style="display: none; margin-bottom: 10px;">
+                    </div>
+                    <div style="flex: 1; padding-left: 10px;">
+                        <h3 id="preview-name"></h3>
+                        <p id="preview-age"></p>
+                        <p id="preview-race"></p>
+                        <p id="preview-appearance"></p>
+                        <p id="preview-overview"></p>
+                        <p id="preview-goals"></p>
+                    </div>
                 </div>
-                <div style="flex: 1; padding-left: 10px;">
-                    <h3 id="preview-name"></h3>
-                    <p id="preview-age"></p>
-                    <p id="preview-race"></p>
-                    <p id="preview-appearance"></p>
+                <div id="vertical-stack-layout" style="display: none; text-align: center;">
+                    <img id="stack-preview-image" src="" alt="Character Image" style="display: none; margin-bottom: 10px;">
+                    <h3 id="stack-preview-name"></h3>
+                    <p id="stack-preview-age"></p>
+                    <p id="stack-preview-race"></p>
+                    <p id="stack-preview-appearance"></p>
+                    <p id="stack-preview-overview"></p>
+                    <p id="stack-preview-goals"></p>
                 </div>
             </div>
             <!-- Card Settings -->
@@ -83,9 +102,11 @@
                     <option value="Courier New, monospace">Courier New</option>
                 </select>
             </div>
+            <button id="export-png" class="button">Export as PNG</button>
         </div>
     </div>
-<script src="scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="scripts.js"></script>
 </body>
 
 </html>
