@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fantasy Chronicle Timeline</title>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="styles.css" rel="stylesheet">
 
 </head>
 <body>
-    <h1 class="page-title">Time Line Manager</h1>
+      <h1 class="page-title">Time Line Manager </h1>
     <div class="container">
         <div class="input-section">
             <div class="form-group">
@@ -17,11 +18,36 @@
             </div>
             <div class="form-group">
                 <label for="eventTitle">Title of the Event:</label>
-                <input type="text" id="eventTitle" placeholder="Enter the title of your event" required>
+                <input type="text" id="eventTitle" placeholder="Enter the title of your tale" required>
+            </div>
+            <div class="form-group">
+                <label>Choose an Icon:</label>
+                <div class="icon-select">
+                    <label>
+                        <input type="radio" name="icon" value="fa-crown" checked>
+                        <i class="fas fa-crown"></i>
+                    </label>
+                    <label>
+                        <input type="radio" name="icon" value="fa-dragon">
+                        <i class="fas fa-dragon"></i>
+                    </label>
+                    <label>
+                        <input type="radio" name="icon" value="fa-sword">
+                        <i class="fas fa-sword"></i>
+                    </label>
+                    <label>
+                        <input type="radio" name="icon" value="fa-scroll">
+                        <i class="fas fa-scroll"></i>
+                    </label>
+                    <label>
+                        <input type="radio" name="icon" value="fa-magic">
+                        <i class="fas fa-magic"></i>
+                    </label>
+                </div>
             </div>
             <div class="form-group">
                 <label for="eventDescription">Event Description:</label>
-                <textarea id="eventDescription" placeholder="Tell your tale..." required></textarea>
+                <textarea id="eventDescription" placeholder="Tell your story..." required></textarea>
             </div>
             <div class="form-group">
                 <label for="eventPosition">Position in the Timeline:</label>
@@ -31,7 +57,6 @@
                 </select>
             </div>
             <button onclick="addEvent()">Record Event</button>
-            <button onclick="clearEvents()" style="background-color: #8b4513;">Clear All Tales</button>
         </div>
 
         <div class="timeline-container">
