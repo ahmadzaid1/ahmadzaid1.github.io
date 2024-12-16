@@ -1,8 +1,6 @@
 let events = [];
         let scrollPosition = 0;
 
-        // Add floating decorations
-
         function addEvent() {
             const date = document.getElementById('eventDate').value;
             const title = document.getElementById('eventTitle').value;
@@ -52,7 +50,6 @@ let events = [];
                     <div class="event-icon">
                         <i class="fas ${event.icon}"></i>
                     </div>
-                    <img src="/api/placeholder/300/150" alt="Event Image" class="event-image">
                     <div class="event-date">${event.date.toLocaleDateString('en-US', { 
                         year: 'numeric', 
                         month: 'long', 
@@ -100,10 +97,7 @@ let events = [];
             });
         }
 
-        // Initialize floating decorations
-        addFloatingDecorations();
-
-        // Save timeline to localStorage whenever it changes
+ // Save timeline to localStorage whenever it changes
         function saveToLocalStorage() {
             localStorage.setItem('fantasyTimeline', JSON.stringify(events));
         }
