@@ -81,21 +81,6 @@ let events = [];
             }
         }
 
-        function scrollTimeline(direction) {
-            const container = document.querySelector('.timeline-container');
-            const scrollAmount = 300;
-            
-            if (direction === 'left') {
-                scrollPosition = Math.max(0, scrollPosition - scrollAmount);
-            } else {
-                scrollPosition += scrollAmount;
-            }
-            
-            container.scrollTo({
-                left: scrollPosition,
-                behavior: 'smooth'
-            });
-        }
 
  // Save timeline to localStorage whenever it changes
         function saveToLocalStorage() {
