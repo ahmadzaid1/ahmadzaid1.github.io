@@ -104,6 +104,7 @@ select {
 button {
     background-color: #8b4513;
     color: #fff9e6;
+    margin-left: 150px;
     border: none;
     padding: 12px 25px;
     border-radius: 8px;
@@ -206,20 +207,15 @@ button:hover {
 }
 
 .event-icon {
+    text-align: center;
     font-size: 24px;
     color: #8b4513;
     margin-bottom: 10px;
 }
 
-.event-image {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 15px;
-}
 
 .event-date {
+    text-align: center;
     font-size: 0.9em;
     color: #666;
     margin-bottom: 8px;
@@ -227,6 +223,8 @@ button:hover {
 }
 
 .event-title {
+    text-align: center;
+
     font-size: 1.2em;
     font-weight: bold;
     margin-bottom: 10px;
@@ -234,6 +232,8 @@ button:hover {
 }
 
 .event-description {
+    text-align: center;
+
     font-size: 0.95em;
     color: #2c1810;
     line-height: 1.6;
@@ -249,25 +249,4 @@ button:hover {
     top: 50%;
     transform: translate(-50%, -50%);
     box-shadow: 0 0 10px rgba(139, 69, 19, 0.3);
-}
-
-.scroll-container {
-    margin-top: 20px;
-    text-align: center;
-}
-
-.scroll-button {
-    background-color: #8b4513;
-    color: #fff9e6;
-    border: none;
-    padding: 10px 20px;
-    margin: 0 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1em;
-    transition: all 0.3s ease;
-}
-
-.scroll-button:hover {
-    background-color: #6b3410;
 }
