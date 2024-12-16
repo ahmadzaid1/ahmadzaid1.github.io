@@ -1,79 +1,195 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const timelineContainer = document.getElementById('timeline-container');
-  const addEventBtn = document.getElementById('add-event-btn');
-  const exportBtn = document.getElementById('export-btn');
-  const feedbackMessage = document.getElementById('feedback-message');
+let events = [];
+        let scrollPosition = 0;
 
-  let draggedEvent = null;
+        // Add floating decorations
 
-  // Add a new event
-  addEventBtn.addEventListener('click', () => {
-    const title = document.getElementById('title').value;
-    const description = document.getElementById('description').value;
-    const date = document.getElementById('date').value;
+        function addEvent() {
+            const date = document.getElementById('eventDate').value;
+            const title = document.getElementById('eventTitle').value;
+            const description = document.getElementById('eventDescription').value;
+            const position = document.getElementById('eventPosition').value;
+            const icon = document.querySelector('input[name="icon"]:checked').value;
 
-    if (title && description && date) {
-      const eventDiv = document.createElement('div');
-      eventDiv.classList.add('event');
-      eventDiv.setAttribute('draggable', 'true');
-      eventDiv.innerHTML = `
-        <div class="event-title">${title}</div>
-        <div class="event-description">${description}</div>
-        <div class="event-date">Date: ${new Date(date).toLocaleDateString()}</div>
-      `;
+            if (!date || !title || !description) {
+                alert('Please fill in all fields of your chronicle');
+                return;
+            }
 
-      // Add drag-and-drop event listeners
-      eventDiv.addEventListener('dragstart', handleDragStart);
-      eventDiv.addEventListener('dragend', handleDragEnd);
+            events.push({
+                date: new Date(date),
+                title,
+                description,
+                position,
+                icon
+            });
 
-      timelineContainer.appendChild(eventDiv);
-      feedbackMessage.textContent = 'Event Added! Drag it to the timeline.';
-      feedbackMessage.style.color = 'green';
+            events.sort((a, b) => a.date - b.date);
+            renderEvents();
+            clearForm();
+        }
 
-      // Reset form
-      document.getElementById('event-form').reset();
-    } else {
-      feedbackMessage.textContent = 'Please fill out all fields!';
-      feedbackMessage.style.color = 'red';
-    }
-  });
+        function renderEvents() {
+            const container = document.getElementById('eventsContainer');
+            container.innerHTML = '';
 
-  // Drag-and-drop handlers
-  function handleDragStart(event) {
-    draggedEvent = event.target;
-    draggedEvent.classList.add('dragging');
-  }
+            if (events.length === 0) return;
 
-  function handleDragEnd(event) {
-    draggedEvent.classList.remove('dragging');
-    draggedEvent = null;
-  }
+            const timelineStart = events[0].date;
+            const timelineEnd = events[events.length - 1].date;
+            const timelineRange = timelineEnd - timelineStart;
 
-  // Allow dropping on the timeline container
-  timelineContainer.addEventListener('dragover', (event) => {
-    event.preventDefault(); // Allow drop
-  });
+            events.forEach((event, index) => {
+                const eventElement = document.createElement('div');
+                eventElement.className = `event ${event.position}`;
 
-  timelineContainer.addEventListener('drop', (event) => {
-    event.preventDefault();
-    if (draggedEvent) {
-      // Position the event where it was dropped
-      const rect = timelineContainer.getBoundingClientRect();
-      const offsetX = event.clientX - rect.left;
-      const offsetY = event.clientY - rect.top;
+                const position = timelineRange === 0 ? 50 :
+                    10 + ((event.date - timelineStart) / timelineRange) * 80;
 
-      draggedEvent.style.left = `${offsetX - draggedEvent.offsetWidth / 2}px`;
-      draggedEvent.style.top = `${offsetY - draggedEvent.offsetHeight / 2}px`;
-    }
-  });
+                eventElement.style.left = `${position}%`;
+                eventElement.style.transform = 'translateX(-50%)';
 
-  // Export timeline as PNG
-  exportBtn.addEventListener('click', () => {
-    html2canvas(timelineContainer).then(canvas => {
-      const link = document.createElement('a');
-      link.href = canvas.toDataURL();
-      link.download = 'timeline.png';
-      link.click();
-    });
-  });
-});
+                eventElement.innerHTML = `
+                    <div class="event-icon">
+                        <i class="fas ${event.icon}"></i>
+                    </div>
+                    <img src="/api/placeholder/300/150" alt="Event Image" class="event-image">
+                    <div class="event-date">${event.date.toLocaleDateString('en-US', { 
+                        year: 'numeric', 
+                        month: 'long', 
+                        day: 'numeric' 
+                    })}</div>
+                    <div class="event-title">${event.title}</div>
+                    <div class="event-description">${event.description}</div>
+                `;
+
+                const dot = document.createElement('div');
+                dot.className = 'event-dot';
+                dot.style.left = `${position}%`;
+
+                container.appendChild(eventElement);
+                container.appendChild(dot);
+            });
+        }
+
+        function clearForm() {
+            document.getElementById('eventDate').value = '';
+            document.getElementById('eventTitle').value = '';
+            document.getElementById('eventDescription').value = '';
+        }
+
+        function clearEvents() {
+            if (confirm('Are you sure you wish to clear all chronicles from the timeline?')) {
+                events = [];
+                renderEvents();
+            }
+        }
+
+        function scrollTimeline(direction) {
+            const container = document.querySelector('.timeline-container');
+            const scrollAmount = 300;
+            
+            if (direction === 'left') {
+                scrollPosition = Math.max(0, scrollPosition - scrollAmount);
+            } else {
+                scrollPosition += scrollAmount;
+            }
+            
+            container.scrollTo({
+                left: scrollPosition,
+                behavior: 'smooth'
+            });
+        }
+
+        // Initialize floating decorations
+        addFloatingDecorations();
+
+        // Save timeline to localStorage whenever it changes
+        function saveToLocalStorage() {
+            localStorage.setItem('fantasyTimeline', JSON.stringify(events));
+        }
+
+        // Load timeline from localStorage on page load
+        function loadFromLocalStorage() {
+            const savedTimeline = localStorage.getItem('fantasyTimeline');
+            if (savedTimeline) {
+                events = JSON.parse(savedTimeline).map(event => ({
+                    ...event,
+                    date: new Date(event.date)
+                }));
+                renderEvents();
+            }
+        }
+
+        // Export timeline to JSON file
+        function saveToFile() {
+            const timelineData = JSON.stringify(events, null, 2);
+            const blob = new Blob([timelineData], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'fantasy-timeline.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Import timeline from JSON file
+        function loadFromFile() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            
+            input.onchange = e => {
+                const file = e.target.files[0];
+                const reader = new FileReader();
+                
+                reader.onload = function(event) {
+                    try {
+                        const importedEvents = JSON.parse(event.target.result);
+                        // Validate the imported data
+                        if (Array.isArray(importedEvents) && importedEvents.every(event => 
+                            event.date && event.title && event.description && event.position && event.icon
+                        )) {
+                            events = importedEvents.map(event => ({
+                                ...event,
+                                date: new Date(event.date)
+                            }));
+                            saveToLocalStorage();
+                            renderEvents();
+                            alert('Timeline imported successfully!');
+                        } else {
+                            alert('Invalid timeline file format');
+                        }
+                    } catch (error) {
+                        alert('Error importing timeline: ' + error.message);
+                    }
+                };
+                
+                reader.readAsText(file);
+            };
+            
+            input.click();
+        }
+
+        // Update existing functions to auto-save
+        const originalAddEvent = addEvent;
+        addEvent = function() {
+            originalAddEvent();
+            saveToLocalStorage();
+        };
+
+        const originalClearEvents = clearEvents;
+        clearEvents = function() {
+            if (confirm('Are you sure you wish to clear all chronicles from the timeline?')) {
+                events = [];
+                renderEvents();
+                saveToLocalStorage();
+            }
+        };
+
+        // Initialize timeline on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadFromLocalStorage();
+            addFloatingDecorations();
+        });
