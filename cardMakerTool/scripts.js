@@ -18,8 +18,12 @@ const importBtn = document.getElementById('import-btn');
 document.getElementById('character-image').addEventListener('change', function(event) {
     const file = event.target.files[0];
     if (file) {
-        previewImage.src = URL.createObjectURL(file);
-        previewImage.style.display = 'block';
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            previewImage.src = e.target.result;
+            previewImage.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
     }
 });
 
@@ -32,38 +36,68 @@ document.getElementById('image-shape').addEventListener('change', function(event
     previewImage.style.borderRadius = event.target.value === 'circle' ? '50%' : '0';
 });
 
-// Update character attributes in the card preview
-characterName.addEventListener('input', () => document.getElementById('preview-name').textContent = characterName.value);
-characterAge.addEventListener('input', () => document.getElementById('preview-age').textContent = characterAge.value);
+// Preview text updates
+characterName.addEventListener('input', () => {
+    document.getElementById('preview-name').textContent = characterName.value;
+});
 
-// Update race dynamically
+characterAge.addEventListener('input', () => {
+    document.getElementById('preview-age').textContent = characterAge.value ? `Age: ${characterAge.value}` : '';
+});
+
+// Race handling with custom option
 characterRace.addEventListener('change', () => {
     if (characterRace.value === 'custom') {
-        characterRaceOther.style.display = 'block'; // Show custom race input
-        document.getElementById('preview-race').textContent = characterRaceOther.value || 'Custom Race';
+        characterRaceOther.style.display = 'block';
+        document.getElementById('preview-race').textContent = characterRaceOther.value ? `Race: ${characterRaceOther.value}` : 'Race: Custom';
     } else {
-        characterRaceOther.style.display = 'none'; // Hide custom race input
-        document.getElementById('preview-race').textContent = characterRace.value;
+        characterRaceOther.style.display = 'none';
+        document.getElementById('preview-race').textContent = `Race: ${characterRace.value}`;
     }
 });
 
 characterRaceOther.addEventListener('input', () => {
     if (characterRace.value === 'custom') {
-        document.getElementById('preview-race').textContent = characterRaceOther.value;
+        document.getElementById('preview-race').textContent = `Race: ${characterRaceOther.value}`;
     }
 });
 
-characterAppearance.addEventListener('input', () => document.getElementById('preview-appearance').textContent = characterAppearance.value);
-characterOverview.addEventListener('input', () => document.getElementById('preview-overview').textContent = characterOverview.value);
-characterGoals.addEventListener('input', () => document.getElementById('preview-goals').textContent = characterGoals.value);
+// Character details updates
+characterAppearance.addEventListener('input', () => {
+    document.getElementById('preview-appearance').textContent = characterAppearance.value ? `Appearance: ${characterAppearance.value}` : '';
+});
 
-// Update card settings
-cardBorderColor.addEventListener('input', () => card.style.borderColor = cardBorderColor.value);
-fontSize.addEventListener('input', () => card.style.fontSize = fontSize.value + 'px');
-fontColor.addEventListener('input', () => card.style.color = fontColor.value);
-fontStyle.addEventListener('change', () => card.style.fontFamily = fontStyle.value);
+characterOverview.addEventListener('input', () => {
+    document.getElementById('preview-overview').textContent = characterOverview.value ? `Overview: ${characterOverview.value}` : '';
+});
 
-// Export card as PNG (without the image)
+characterGoals.addEventListener('input', () => {
+    document.getElementById('preview-goals').textContent = characterGoals.value ? `Goals: ${characterGoals.value}` : '';
+});
+
+// Style controls
+cardBorderColor.addEventListener('input', () => {
+    card.style.borderColor = cardBorderColor.value;
+});
+
+fontSize.addEventListener('input', (event) => {
+    card.style.fontSize = `${event.target.value}px`;
+});
+
+fontColor.addEventListener('input', (event) => {
+    card.style.color = event.target.value;
+    // Update all preview elements to ensure consistent coloring
+    const previewElements = card.getElementsByTagName('*');
+    for(let element of previewElements) {
+        element.style.color = event.target.value;
+    }
+});
+
+fontStyle.addEventListener('change', (event) => {
+    card.style.fontFamily = event.target.value;
+});
+
+// Export as PNG
 document.getElementById('export-png').addEventListener('click', () => {
     html2canvas(card).then(canvas => {
         const link = document.createElement('a');
@@ -73,34 +107,26 @@ document.getElementById('export-png').addEventListener('click', () => {
     });
 });
 
-// Export character data (without the image)
+// Export character data
 exportBtn.addEventListener('click', () => {
     try {
-        // Collect character data, excluding image
         const characterData = {
-            name: document.getElementById('character-name').value || '',
-            age: document.getElementById('character-age').value || '',
-            race: document.getElementById('character-race').value === 'custom'
-                ? document.getElementById('character-race-other').value
-                : document.getElementById('character-race').value,
-            appearance: document.getElementById('character-appearance').value || '',
-            overview: document.getElementById('character-overview').value || '',
-            goals: document.getElementById('character-goals').value || '',
+            name: characterName.value || '',
+            age: characterAge.value || '',
+            race: characterRace.value === 'custom' ? characterRaceOther.value : characterRace.value,
+            appearance: characterAppearance.value || '',
+            overview: characterOverview.value || '',
+            goals: characterGoals.value || '',
             fontSize: fontSize.value || '',
             fontColor: fontColor.value || '',
             fontStyle: fontStyle.value || '',
             borderColor: cardBorderColor.value || ''
         };
 
-        // Convert data to JSON
         const jsonString = JSON.stringify(characterData, null, 2);
-
-        // Create a temporary anchor element
         const downloadLink = document.createElement('a');
         downloadLink.href = 'data:application/json;charset=utf-8,' + encodeURIComponent(jsonString);
         downloadLink.download = `${characterData.name || 'character'}.json`;
-
-        // Trigger download
         downloadLink.style.display = 'none';
         document.body.appendChild(downloadLink);
         downloadLink.click();
@@ -110,83 +136,68 @@ exportBtn.addEventListener('click', () => {
     }
 });
 
-// Import Character Data from JSON
+// Import character data
 importBtn.addEventListener('change', (event) => {
     const file = event.target.files[0];
-
     if (file && file.type === 'application/json') {
         const reader = new FileReader();
-
+        
         reader.onload = (e) => {
             try {
                 const characterData = JSON.parse(e.target.result);
-
-                // Populate fields with imported data
-                document.getElementById('character-name').value = characterData.name || '';
-                document.getElementById('character-age').value = characterData.age || '';
                 
-                // Handle race and custom race logic
-                const raceSelect = document.getElementById('character-race');
-                const customRaceInput = document.getElementById('character-race-other');
-                if (['human', 'elf', 'orc'].includes(characterData.race)) {
-                    raceSelect.value = characterData.race;
-                    customRaceInput.style.display = 'none';
+                // Populate form fields
+                characterName.value = characterData.name || '';
+                characterAge.value = characterData.age || '';
+                
+                // Handle race selection
+                if (characterData.race && ['human', 'elf', 'orc'].includes(characterData.race)) {
+                    characterRace.value = characterData.race;
+                    characterRaceOther.style.display = 'none';
                 } else {
-                    raceSelect.value = 'custom';
-                    customRaceInput.value = characterData.race || '';
-                    customRaceInput.style.display = 'block';
+                    characterRace.value = 'custom';
+                    characterRaceOther.value = characterData.race || '';
+                    characterRaceOther.style.display = 'block';
                 }
-
-                document.getElementById('character-appearance').value = characterData.appearance || '';
-                document.getElementById('character-overview').value = characterData.overview || '';
-                document.getElementById('character-goals').value = characterData.goals || '';
-
-                // Update the card preview immediately after import
-                updateCardPreview();
-                console.log('Character data imported successfully:', characterData);
+                
+                characterAppearance.value = characterData.appearance || '';
+                characterOverview.value = characterData.overview || '';
+                characterGoals.value = characterData.goals || '';
+                
+                // Apply styles
+                if (characterData.fontSize) fontSize.value = characterData.fontSize;
+                if (characterData.fontColor) fontColor.value = characterData.fontColor;
+                if (characterData.fontStyle) fontStyle.value = characterData.fontStyle;
+                if (characterData.borderColor) cardBorderColor.value = characterData.borderColor;
+                
+                // Update preview
+                updatePreview();
+                
+                console.log('Character data imported successfully');
             } catch (error) {
                 console.error('Error importing character data:', error);
                 alert('Failed to load JSON. Please check the file format.');
             }
         };
-
+        
         reader.readAsText(file);
     } else {
         alert('Please select a valid JSON file.');
     }
 });
 
-// Function to update the card preview after import
-function updateCardPreview() {
-    const name = document.getElementById('character-name').value;
-    const age = document.getElementById('character-age').value;
-    const race = document.getElementById('character-race').value;
-    const appearance = document.getElementById('character-appearance').value;
-    const overview = document.getElementById('character-overview').value;
-    const goals = document.getElementById('character-goals').value;
-
-    // Update the preview
-    document.getElementById('preview-name').textContent = name || 'Name';
-    document.getElementById('preview-age').textContent = `Age: ${age || 'N/A'}`;
-    document.getElementById('preview-race').textContent = `Race: ${race || 'Unknown'}`;
-    document.getElementById('preview-appearance').textContent = `Appearance: ${appearance || 'N/A'}`;
-    document.getElementById('preview-overview').textContent = `Overview: ${overview || 'N/A'}`;
-    document.getElementById('preview-goals').textContent = `Goals: ${goals || 'N/A'}`;
-
-    // Update image preview if available
-    const imageInput = document.getElementById('character-image');
-    const previewImage = document.getElementById('preview-image');
-    if (imageInput.files && imageInput.files[0]) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            previewImage.src = e.target.result;
-            previewImage.style.display = 'block';
-        };
-        reader.readAsDataURL(imageInput.files[0]);
-    }
+// Update preview after import
+function updatePreview() {
+    document.getElementById('preview-name').textContent = characterName.value;
+    document.getElementById('preview-age').textContent = characterAge.value ? `Age: ${characterAge.value}` : '';
+    document.getElementById('preview-race').textContent = `Race: ${characterRace.value === 'custom' ? characterRaceOther.value : characterRace.value}`;
+    document.getElementById('preview-appearance').textContent = characterAppearance.value ? `Appearance: ${characterAppearance.value}` : '';
+    document.getElementById('preview-overview').textContent = characterOverview.value ? `Overview: ${characterOverview.value}` : '';
+    document.getElementById('preview-goals').textContent = characterGoals.value ? `Goals: ${characterGoals.value}` : '';
+    
+    // Apply styles
+    card.style.fontSize = `${fontSize.value}px`;
+    card.style.color = fontColor.value;
+    card.style.fontFamily = fontStyle.value;
+    card.style.borderColor = cardBorderColor.value;
 }
-
-document.getElementById("card-style").addEventListener("change", function () {
-    const card = document.getElementById("card");
-    card.className = `card ${this.value}`;
-});
