@@ -80,7 +80,7 @@ To make the Name Generator work, you'll need to:
    // Connect to SQLite database
    $db = new SQLite3($db_path);
    ?>
-**Sqlite is much more efficient compared to the bloat MySql***
+#### Sqlite is much more efficient compared to the bloat MySql
 ---
 ### Acknowledgments
 
