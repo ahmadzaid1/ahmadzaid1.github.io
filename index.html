@@ -1,50 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>World Builder</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <!-- Header -->
     <header class="header">
-        <h1 class="title">W🌏rld Builder</h1>
-        <button class="contact-button">Contact Us ☎</button>
+        <h1 class="title-header">W🌏rld Builder</h1>
+        <a href="/contactUs/contact.html">
+            <button class="contact-button"><b>Contact Us ☎</b></button>
+        </a>
     </header>
-    <!-- Main Content -->
+
+    <!-- using main is like using <strong> instead of <b> -->
     <main class="main-content">
-        <img class="city-image" src="City.webp" alt="A futuristic city landscape">
-        <div class="content">
-            <h1 class="site-heading">Start Building Your World Today</h1>
-        </div>
-        <!-- Character Card Maker Introduction Section -->
-        <section class="tool-intro">
+        <img src="City.webp" alt="city">
+            <h1 class="title-center">Start Building Your World Today</h1>
+
+        <!-- section, same reason as main. useless but whatever -->
+        <section>
             <div class="tool-description">
                 <h2>Character Card Maker</h2>
                 <p>Bring your characters to life with our Character Card Maker. Customize details like appearance, race, and goals to create unique profiles for each character in your world.</p>
                 <a href="/cardMakerTool/cardMaker.html">
-                    <button>Get Started</button>
+                    <button class="get-started-button"><b>Get Started</b></button>
                 </a>
             </div>
             <div class="tool-image">
-                <img src="example.png" alt="Character Card Preview">
-            </div>
-            <br>
-            <div class="tool-description">
-                <h2>Time Line Maker</h2>
-                <p>Bluh Bluh.</p>
-                <a href="/timeLineManager/timeLine.html">
-                    <button>Get Started</button>
-                </a>
-            </div>
-            <div class="tool-image">
-                <img src="example.png" alt="Time Line Preview">
+                <img src="card.png" alt="Character Card Preview" style="width:400px; height:400px">
             </div>
         </section>
+
+        <section>
+            <div class="tool-description">
+                <h2>Timeline Maker</h2>
+                <p>Track your world's history with our Timeline Maker. Add events with details like dates, descriptions, and images to create a dynamic, organized timeline that brings your world’s story to life.</p>
+                <a href="/timeLineManager/timeLine.html">
+                    <button class="get-started-button"><b>Get Started</b></button>
+                </a>
+            </div>
+            <div class="tool-image">
+                <img src="timeLine.png" alt="Timeline Preview">
+            </div>
+        </section>
+        <section>
+            <div class="tool-description">
+                <h2>Name Generator</h2>
+                <p>Explore thousands of names with our Name Generator. Discover and generate unique names for your characters. Tailored to fit the style and setting of your world.</p>
+                <a href="">
+                    <button class="get-started-button"><b>Get Started</b></button>
+                </a>
+            </div>
+            <div class="tool-image">
+                <img src="generatedNames.png" alt="Name Generator Preview">
+            </div>
+        </section>
+
+        <!-- Reviews Section -->
+        <section class="reviews">
+            <h2 class="title-reviews" style="padding-left:37%">What People Are Saying</h2>
+            <div class="reviews-container">
+                <div class="review-card">
+                    <br><br><br><br> <br><br>
+                    <p>"Website Looking Great"</p>
+                    <p><b>- Towaomasu</b></p>
+                </div>
+                <div class="review-card">
+                     <br><br><br><br> <br><br>
+                    <p>"Nice 👍🏾"</p>
+
+                    <p><b>- I.Z</b></p>
+                </div>
+                <div class="review-card">
+                    <p>"The moment I stumbled upon this site, I knew I was in for something special. It wasn't just a website – no, no, it was an adventure. The design, perfectly symmetrical, like the inside of a vintage train, felt like it was built by a meticulous craftsman, perhaps someone who dabbles in both architecture and the art of eccentric storytelling"</p>
+                    <p><b>- Wes Anderson</b></p>
+                </div>
+            </div>
+        </section>
+
     </main>
+
+    <footer class="footer" style="display: flex; justify-content: space-between; align-items: center;">
+    <p style="margin: 0;"><b>&copy; 2024 World Builder. All rights reserved.</b></p>
+     <p style="margin: 0;"><b><a href="/sitesLikeUs/sitesLikeUs.html" style="text-decoration:none; color:white;"> Other Sites</b></a></p>
+</footer>
+
+
 </body>
 
 </html>
