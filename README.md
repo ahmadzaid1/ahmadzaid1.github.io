@@ -2,7 +2,7 @@
 
 ### Homepage
 
-We considered different color patterns for the site's theme, including:
+I considered different color patterns for the site's theme, including:
 
 - **Cyberpunk Theme**  
   ![Cyberpunk Theme](https://files.catbox.moe/lajs8a.png)
@@ -13,8 +13,7 @@ We considered different color patterns for the site's theme, including:
 - **Medieval Theme**  
   ![Medieval Theme](https://files.catbox.moe/rx9qq5.png)
 
-After careful consideration, **the Medieval Theme** has been chosen.
-
+After consideration, **the Medieval Theme** has been chosen, since it suits the whole worldbuilding thing.
 ---
 
 ### Header Section
