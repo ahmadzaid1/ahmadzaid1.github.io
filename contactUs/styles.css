@@ -1,0 +1,114 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Palatino', 'Times New Roman', serif;
+    cursor: url('sword-curs.png') 16 16, auto;
+
+}
+
+body {
+    padding: 20px;
+    background: #f4e4bc;
+    color: #2c1810;
+    background-blend-mode: multiply;
+}
+h1 {
+    text-align: center;
+    font-size: 2.5em;
+    color: #2c1810;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    margin-bottom: 30px;
+}
+
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff9e6;
+    padding: 30px;
+    border-radius: 15px;
+    border: 3px solid #8b4513;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.form-section, .card-preview {
+    width: 45%;
+}
+
+h2 {
+    color: #4a2810;
+    margin-bottom: 20px;
+}
+
+h3 {
+    color: #4a2810;
+    margin-top: 10px;
+}
+
+.section {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #fff9e6;
+    border: 2px solid #8b4513;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #4a2810;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    background-color: #fff9e6;
+    border: 2px solid #8b4513;
+    border-radius: 8px;
+    color: #2c1810;
+    font-size: 1em;
+}
+
+textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+button {
+    background-color: #8b4513;
+    color: #fff9e6;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: #6b3410;
+    transform: translateY(-2px);
+}
+
+/* Media Query for smaller screens */
+@media (max-width: 1024px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .form-section,
+    .card-preview {
+        width: 100%;
+    }
+}

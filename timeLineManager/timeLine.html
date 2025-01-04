@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Timeline Maker</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+</head>
+
+<body>
+    <h1 class="page-title">Timeline Maker </h1>
+    <div class="container">
+        <div class="input-section">
+            <div class="form-group">
+                <label for="eventDate">Date of the Event:</label>
+                <input type="date" id="eventDate" required>
+            </div>
+            <div class="form-group">
+                <label for="eventTitle">Title of the Event:</label>
+                <input type="text" id="eventTitle" placeholder="Enter the title of your event" required>
+            </div>
+            <div class="form-group">
+                <label>Choose an Icon:</label>
+                <div class="icon-select">
+                    <label>
+                        <input type="radio" name="icon" value="fa-crown" checked>
+                        <i class="fas fa-crown"></i>
+                    </label>
+                    <label>
+                        <input type="radio" name="icon" value="fa-dragon">
+                        <i class="fas fa-dragon"></i>
+                    </label>
+                    <label>
+                        <input type="radio" name="icon" value="fa-sword">
+                        <i class="fas fa-sword"></i>
+                    </label>
+                    <label>
+                        <input type="radio" name="icon" value="fa-scroll">
+                        <i class="fas fa-scroll"></i>
+                    </label>
+                    <label>
+                        <input type="radio" name="icon" value="fa-magic">
+                        <i class="fas fa-magic"></i>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="eventDescription">Event Description:</label>
+                <textarea id="eventDescription" placeholder="Tell your story..." required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="eventPosition">Position in the Timeline:</label>
+                <select id="eventPosition">
+                    <option value="above">Above the Timeline</option>
+                    <option value="below">Below the Timeline</option>
+                </select>
+            </div>
+            <button class="addEvent" onclick="addEvent()">Add Event</button>
+        </div>
+        <div class="timeline-container">
+            <div class="timeline-line"></div>
+            <div class="events-container" id="eventsContainer"></div>
+        </div>
+        <div class="bottom-but">
+            <button onclick="exportJSON()">Export Timeline as JSON</button>
+            <button onclick="saveJSON()">Import Timeline</button>
+            <button onclick="exportAsPNG()">Export as PNG</button>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="scripts.js"></script>
+</body>
+
+</html>

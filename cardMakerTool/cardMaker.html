@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <title>Character Card Maker</title>
+</head>
+
+<body>
+        <h1>Character Card Maker</h1>
+    <div class="container">
+        <!-- Left Section: Form -->
+        <div class="form-section">
+            <div id="export-import-section">
+                <h2 class="section-title">Export / Import</h2>
+                <button id="export-btn">Export as JSON</button>
+                <label for="import-btn" id="import-label">Import JSON</label>
+                <input type="file" id="import-btn" accept=".json" style="display: none;">
+            </div>
+            <!-- Image Attributes -->
+            <div class="section">
+                <h2 class="section-title">Image Attributes</h2>
+                <label for="character-image">Character Image</label>
+                <input type="file" id="character-image" accept="image/*">
+                <label for="image-size">Image Size</label>
+                <input type="range" id="image-size" min="50" max="400" value="100">
+                <label for="image-shape">Image Shape</label>
+                <select id="image-shape">
+                    <option value="rectangle">Rectangle</option>
+                    <option value="circle">Circle</option>
+                </select>
+            </div>
+            <!-- Character Attributes -->
+            <div class="section">
+                <h2 class="section-title">Character Attributes</h2>
+                <label for="character-name">Name</label>
+                <input type="text" id="character-name" placeholder="Character Name">
+                <label for="character-age">Age</label>
+                <input type="text" id="character-age" placeholder="Character Age">
+                <label for="character-race">Race</label>
+                <select id="character-race">
+                    <optgroup label="Elven Races">
+                        <option value="moon-elves">Moon Elves</option>
+                        <option value="forest-elves">Forest Elves</option>
+                        <option value="sea-elves">Sea Elves</option>
+                        <option value="desert-elves">Desert Elves</option>
+                        <option value="high-elves">High Elves</option>
+                    </optgroup>
+                    <optgroup label="Dwarven Races">
+                        <option value="mountain-dwarves">Mountain Dwarves</option>
+                        <option value="deep-dwarves">Deep Dwarves</option>
+                        <option value="hill-dwarves">Hill Dwarves</option>
+                        <option value="fire-dwarves">Fire Dwarves</option>
+                        <option value="frost-dwarves">Frost Dwarves</option>
+                    </optgroup>
+                    <optgroup label="Human-like Races">
+                        <option value="celestials">Celestials</option>
+                        <option value="amazons">Amazons</option>
+                        <option value="nomads">Nomads</option>
+                        <option value="mystics">Mystics</option>
+                        <option value="witchfolk">Witchfolk</option>
+                    </optgroup>
+                    <optgroup label="Beast-like Races">
+                        <option value="lupine">Lupine</option>
+                        <option value="feline">Feline</option>
+                        <option value="draconians">Draconians</option>
+                        <option value="minotaurs">Minotaurs</option>
+                        <option value="kitsune">Kitsune</option>
+                    </optgroup>
+                    <optgroup label="Elemental Races">
+                        <option value="fireborn">Fireborn</option>
+                        <option value="waterfolk">Waterfolk</option>
+                        <option value="earthkin">Earthkin</option>
+                        <option value="windwalkers">Windwalkers</option>
+                        <option value="stormbringers">Stormbringers</option>
+                    </optgroup>
+                    <optgroup label="Mystical Races">
+                        <option value="faeries">Faeries</option>
+                        <option value="nymphs">Nymphs</option>
+                        <option value="dryads">Dryads</option>
+                        <option value="sylphs">Sylphs</option>
+                        <option value="undines">Undines</option>
+                    </optgroup>
+                    <optgroup label="Hybrid Races">
+                        <option value="centaurs">Centaurs</option>
+                        <option value="merfolk">Merfolk</option>
+                        <option value="harpies">Harpies</option>
+                        <option value="satyrs">Satyrs</option>
+                        <option value="chimeras">Chimeras</option>
+                    </optgroup>
+                    <optgroup label="Ethereal Races">
+                        <option value="ghostfolk">Ghostfolk</option>
+                        <option value="shadowkind">Shadowkind</option>
+                        <option value="lightbringers">Lightbringers</option>
+                        <option value="dreamwalkers">Dreamwalkers</option>
+                        <option value="phantasms">Phantasms</option>
+                    </optgroup>
+                    <optgroup label="Ancient Races">
+                        <option value="titans">Titans</option>
+                        <option value="golems">Golems</option>
+                        <option value="ancients">Ancients</option>
+                        <option value="guardians">Guardians</option>
+                        <option value="elders">Elders</option>
+                    </optgroup>
+                    <optgroup label="Unique Races">
+                        <option value="glimmerfolk">Glimmerfolk</option>
+                        <option value="voidwalkers">Voidwalkers</option>
+                        <option value="starborn">Starborn</option>
+                        <option value="dreamweavers">Dreamweavers</option>
+                        <option value="timekeepers">Timekeepers</option>
+                    </optgroup>
+                    <option value="custom">Other</option>
+                </select>
+                <input type="text" id="character-race-other" placeholder="Enter custom race" style="display: none;">
+                <label for="character-appearance">Appearance</label>
+                <textarea id="character-appearance" placeholder="Describe appearance"></textarea>
+                <label for="character-overview">Overview</label>
+                <textarea id="character-overview" placeholder="Give an overview"></textarea>
+                <label for="character-goals">Goals</label>
+                <textarea id="character-goals" placeholder="Describe character's goals"></textarea>
+            </div>
+        </div>
+        <!-- Right Section: Card Preview and Settings -->
+        <div class="card-preview">
+            <!-- Character Card -->
+            <div class="card" id="card" style="padding: 20px; border: 5px solid #b07a3b; max-width: 500px; margin-bottom: 20px;">
+                <div style="display: flex;">
+                    <div style="flex: 1;">
+                        <img id="preview-image" src="" alt="Character Image" style="display: none; margin-bottom: 10px;">
+                    </div>
+                    <div style="flex: 1; padding-left: 10px;">
+                        <h3 id="preview-name"></h3>
+                        <p id="preview-age"></p>
+                        <p id="preview-race"></p>
+                        <p id="preview-appearance"></p>
+                        <p id="preview-overview"></p>
+                        <p id="preview-goals"></p>
+                    </div>
+                </div>
+            </div>
+            <!-- Card Settings -->
+            <div class="section">
+                <h2 class="section-title">Card Settings</h2>
+                <label for="card-border-color">Card Border Color</label>
+                <input type="color" id="card-border-color" value="#b07a3b">
+                <label for="card-background-color">Card Background Color</label>
+                <input type="color" id="card-background-color" value="#fff9e6">
+                <label for="font-size">Font Size</label>
+                <input type="range" id="font-size" min="12" max="24" value="16">
+                <label for="font-color">Font Color</label>
+                <input type="color" id="font-color" value="#333333">
+                <label for="font-style">Font Style</label>
+                <select id="font-style">
+                    <option value="Arial, sans-serif">Arial</option>
+                    <option value="Verdana, sans-serif">Verdana</option>
+                    <option value="Helvetica, sans-serif">Helvetica</option>
+                    <option value="Tahoma, sans-serif">Tahoma</option>
+                    <option value="Trebuchet MS, sans-serif">Trebuchet MS</option>
+                    <option value="Times New Roman, serif">Times New Roman</option>
+                    <option value="Georgia, serif">Georgia</option>
+                    <option value="Garamond, serif">Garamond</option>
+                    <option value="Courier New, monospace">Courier New</option>
+                    <option value="Lucida Console, monospace">Lucida Console</option>
+                    <option value="Lucida Sans Unicode, sans-serif">Lucida Sans Unicode</option>
+                    <option value="Palatino Linotype, serif">Palatino Linotype</option>
+                    <option value="Impact, sans-serif">Impact</option>
+                    <option value="Comic Sans MS, sans-serif">Comic Sans MS</option>
+                </select>
+            </div>
+            <button id="export-png" class="button">Export as PNG</button>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="scripts.js"></script>
+</body>
+
+</html>

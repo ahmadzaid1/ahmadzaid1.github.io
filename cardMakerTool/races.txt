@@ -1,0 +1,79 @@
+Elven Races
+
+    Moon Elves 
+    Forest Elves
+    Sea Elves 
+    Desert Elves 
+    High Elves 
+
+Dwarven Races
+
+    Mountain Dwarves 
+    Deep Dwarves 
+    Hill Dwarves 
+    Fire Dwarves 
+    Frost Dwarves 
+
+Human-like Races
+
+    Celestials 
+    Amazons 
+    Nomads 
+    Mystics 
+    Witchfolk 
+
+Beast-like Races
+
+    Lupine 
+    Feline 
+    Draconians 
+    Minotaurs 
+    Kitsune 
+
+Elemental Races
+
+    Fireborn 
+    Waterfolk 
+    Earthkin 
+    Windwalkers 
+    Stormbringers 
+
+Mystical Races
+
+    Faeries 
+    Nymphs 
+    Dryads 
+    Sylphs 
+    Undines 
+
+Hybrid Races
+
+    Centaurs 
+    Merfolk 
+    Harpies 
+    Satyrs 
+    Chimeras 
+
+Ethereal Races
+
+    Ghostfolk 
+    Shadowkind 
+    Lightbringers 
+    Dreamwalkers 
+    Phantasms 
+
+Ancient Races
+
+    Titans 
+    Golems 
+    Ancients 
+    Guardians 
+    Elders 
+
+Unique Races
+
+    Glimmerfolk 
+    Voidwalkers 
+    Starborn 
+    Dreamweavers 
+    Timekeepers 
