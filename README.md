@@ -1,46 +1,66 @@
-
 # World Building Site
 
 ### Homepage
 
-Different color patterns have been considered for the theme of the site.
- 
+We considered different color patterns for the site's theme, including:
 
- -  a cyberpunk theme.
-![enter image description here](https://files.catbox.moe/lajs8a.png)
- - a minimalist theme.
- ![enter image description here](https://files.catbox.moe/uw8qg8.png)
- - a medieval theme.
- ![enter image description here](https://files.catbox.moe/rx9qq5.png)
+- **Cyberpunk Theme**  
+  ![Cyberpunk Theme](https://files.catbox.moe/lajs8a.png)
+  
+- **Minimalist Theme**  
+  ![Minimalist Theme](https://files.catbox.moe/uw8qg8.png)
+  
+- **Medieval Theme**  
+  ![Medieval Theme](https://files.catbox.moe/rx9qq5.png)
 
-**The Medieval Theme** has been picked.
+After careful consideration, **the Medieval Theme** has been chosen.
+
+---
 
 ### Header Section
 
--   Main title: "W🌏rld Builder" (i couldn't find an emoji without colors, and using an icon is pain, so whatever)
--   "Contact Us" button leads to contactUS page.
+- **Main Title**: **W🌏rld Builder**  
+
+- A "Contact Us" button that redirects to the **Contact Us** page.
+
+---
 
 ### Main Content Areas
 
-1. Title with an image under it
-    -  Main heading: "Start Building Your World Today".
-   -  image: did it with [krita](https://krita.org/en/). 
-2.  Tool Sections (3 main tools)
-    -   Character Card Maker.
-    -   Timeline Maker.
-    -   Name Generator (to implement database stuff)
-    
-    Each tool section includes:
-    -   Descriptive heading.
-    -   Paragraph description.
-    -   "Get Started" button leads to each tool.
-    -   Preview image (the character card maker was done by a friend).
-3.  Reviews Section
-    -   Title in the middle: "What People Are Saying", the longer the title the better.
-    -   3 review cards.
-    - Two genuine and a fake one.
+1. **Introduction Section**
+   - **Main Heading**: **Start Building Your World Today**
+   - An image created using [Krita](https://krita.org/en/).
+
+2. **Tool Sections** (3 main tools):  
+   Each tool section features:
+   - A **descriptive heading**.
+   - A **paragraph description** of the tool's purpose.
+   - A "Get Started" button linking to the respective tool.
+   - A **preview image** (e.g., the Character Card Maker preview was contributed by a friend).
+
+   The tools are:
+   - **Character Card Maker**
+   - **Timeline Maker**
+   - **Name Generator** **_(it doesn't work, download the sqlite database in the repo and configure your php to make it work)._**
+
+3. **Reviews Section**
+   - **Section Title**: **What People Are Saying**  
+     _(A longer title adds emphasis.)_
+   - Includes **three review cards**:
+     - Two genuine reviews.
+     - An unfortunately fake one from Wes Anderson.
+
+---
 
 ### Footer
 
--   Copyright notice
--   "Other Sites" link
+- **Copyright Notice**  
+  Clearly states ownership and copyright for the site.
+
+- A link to **Other Sites** for related or additional resources.
+---
+### Acknowledgments
+
+Thanks to [Janelle Shane's DnD Characters GitHub Repository](https://github.com/janelleshane/DnD-characters) for inspiring character names used in this project.
+
+
